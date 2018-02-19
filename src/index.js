@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
 import './index.css';
 import App from './App';
+import NavLink from 'react-router-dom/NavLink';
 
-const happyBlock = () => {
+const homePage = () => {
     return(
         <div>
             Alohahfj
@@ -12,10 +13,26 @@ const happyBlock = () => {
     )
 };
 
+const createPage = () => {
+    return(
+        <div>
+            Aloha its create
+        </div>
+    );
+};
+
 const editPage = () => {
     return(
         <div>
-            Aloha its me
+            Aloha its edit
+        </div>
+    );
+};
+
+const helpPage = () => {
+    return(
+        <div>
+            Aloha its help
         </div>
     );
 };
@@ -23,23 +40,38 @@ const editPage = () => {
 const NotFoundPage = () => {
     return(
         <div>
-            404 Not Found
+            404 - <Link to="/">Go to Home</Link>
         </div>
     );
 }
 
-class Routes extends React.Component {
-    render(){
+const Header = () => {
+    return (
+        <header>
+            <h1>Budget Application</h1>
+            <NavLink to="/" activeClassName="is-active" exact={true}>Home</NavLink>
+            <NavLink to="/create" activeClassName="is-active">Create</NavLink>
+            <NavLink to="/edit" activeClassName="is-active">Edit</NavLink>
+            <NavLink to="/help" activeClassName="is-active">Help</NavLink>
+        </header>
+    );
+}
+
+const Routes = () => {
         return(
             <BrowserRouter>
-                <Switch>
-                    <Route path="/" component={happyBlock} exact={true}/>
-                    <Route path="/create" component={editPage}/>
-                    <Route component={NotFoundPage}/>
-                </Switch>
+                <div>
+                    <Header />
+                    <Switch>
+                        <Route path="/" component={homePage} exact={true}/>
+                        <Route path="/create" component={createPage}/>
+                        <Route path="/edit" component={editPage}/>
+                        <Route path="/help" component={helpPage}/>
+                        <Route component={NotFoundPage}/>
+                    </Switch>
+                </div>
             </BrowserRouter>
         )
-    }
 }
 
 
