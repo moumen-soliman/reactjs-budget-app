@@ -1,59 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
-
-const HomePage = () => (
-    <div>
-        This is homepage
-    </div>
-)
-
-const CreateBudgetPage = () => (
-    <div>
-        This Create page
-    </div>
-)
-
-const EditBudgetPage = () => (
-    <div>
-        This is Edit Page
-    </div>
-)
-
-const HelpBudgetPage = () => (
-    <div>
-        This Help page
-    </div>
-)
-
-const NotFoundPage = () => (
-    <div>
-        404 - <Link to="/">Back to homepage</Link>
-    </div>
-)
-
-const Header = () => (
-    <header>
-        <h1>Budget</h1>
-        <NavLink to="/" activeClassName="is-active">HomePage</NavLink>
-        <NavLink to="/create" activeClassName="is-active">Create</NavLink>
-        <NavLink to="/edit" activeClassName="is-active">Edit</NavLink>
-        <NavLink to="/help" activeClassName="is-active">Help</NavLink>
-    </header>
-)
+import BudgetDashboardPage from '../components/BudgetDashboardPage';
+import AddBudgetPage from '../components/AddBudgetPage';
+import EditBudgetPage from '../components/EditBudgetPage';
+import HelpPage from '../components/HelpPage';
+import NotFoundPage from '../components/NotFoundPage';
+import Header from '../components/Header';
 
 const AppRouter = () => (
-    <BrowserRouter>
-        <div>
-            <Header />
-            <Switch>
-                <Route exact path="/" component={HomePage}/>
-                <Route path="/create" component={CreateBudgetPage}/>
-                <Route path="/edit" component={EditBudgetPage}/>
-                <Route path="/help" component={HelpBudgetPage}/>
-                <Route component={NotFoundPage}/>
-            </Switch>
-        </div>
-    </BrowserRouter>
-)
+  <BrowserRouter>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/" component={BudgetDashboardPage} exact={true} />
+        <Route path="/create" component={AddBudgetPage} />
+        <Route path="/edit" component={EditBudgetPage} />
+        <Route path="/help" component={HelpPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
 
-export default AppRouter
+export default AppRouter;
