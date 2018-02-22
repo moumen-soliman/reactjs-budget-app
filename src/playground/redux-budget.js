@@ -30,6 +30,11 @@ const editBudget = (id, updates) => ({
 })
 
 // SET_TEXT_FILTER
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT_FILTER',
+  text
+})
+
 // SORT_BY_DATE
 // SORT_BY_AMOUNT
 // SET_START_DATE
@@ -77,6 +82,12 @@ const filtersReducerDefaultState = {
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      return {
+        ...state,
+        text: action.text
+      };
+
     default:
       return state;
   }
@@ -100,6 +111,8 @@ const budgetTwo = store.dispatch(addBudget({ description: 'Anotherone', amount: 
  
 store.dispatch(removeBudget({ id: budgetOne.budget.id }));
 store.dispatch(editBudget(budgetTwo.budget.id, { amount: 500 }));
+store.dispatch(setTextFilter('moumentext'));
+store.dispatch(setTextFilter( )); //empty one
 
 const demoState = {
   budgets: [{
