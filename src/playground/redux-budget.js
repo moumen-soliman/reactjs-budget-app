@@ -1,7 +1,27 @@
 import { createStore, combineReducers } from 'redux';
+import uuid from 'uuid';
 
 // ADD_budget
+const addBudget = (
+  {
+    description = '', 
+    note = '', 
+    amount = 0, 
+    createdAt = 0 
+  
+  } = {}) => ({
+  type: 'ADD_BUDGET',
+  budget: {
+    id: uuid()
+  }
+})
+
 // REMOVE_budget
+const removeBudget = ({ id } = {}) => ({
+  type: 'REMOVE_BUDGET',
+  id
+});
+
 // EDIT_budget
 // SET_TEXT_FILTER
 // SORT_BY_DATE
@@ -15,6 +35,14 @@ const budgetsReducerDefaultState = [];
 
 const budgetsReducer = (state = budgetsReducerDefaultState, action) => {
   switch (action.type) {
+    case 'ADD_BUDGET' : 
+      return [
+        ...state,
+        action.budget
+      ];
+    case 'REMOVE_BUDGET':
+      return state.filter(({ id }) => id !== action.id);
+
     default:
       return state;
   }
@@ -46,7 +74,15 @@ const store = createStore(
   })
 );
 
-console.log(store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+})
+
+const budgetOne = store.dispatch(addBudget({ description: 'Phone', amount: 100 }));
+ 
+store.dispatch(removeBudget({ id: budgetOne.budget.id }));
+
+store.dispatch(editBudget(budgetTwo.budget.id, { amount: 500 }));
 
 const demoState = {
   budgets: [{
