@@ -23,6 +23,12 @@ const removeBudget = ({ id } = {}) => ({
 });
 
 // EDIT_budget
+const editBudget = (id, updates) => ({
+  type: 'EDIT_BUDGET',
+  id,
+  updates
+})
+
 // SET_TEXT_FILTER
 // SORT_BY_DATE
 // SORT_BY_AMOUNT
@@ -35,14 +41,25 @@ const budgetsReducerDefaultState = [];
 
 const budgetsReducer = (state = budgetsReducerDefaultState, action) => {
   switch (action.type) {
-    case 'ADD_BUDGET' : 
+    case 'ADD_BUDGET': 
       return [
         ...state,
         action.budget
       ];
     case 'REMOVE_BUDGET':
       return state.filter(({ id }) => id !== action.id);
-
+    
+    case 'EDIT_BUDGET':
+      return state.map((budget) => {
+        if (budget.id === action.id) {
+          return {
+            ...budget,
+            ...action.updates
+          };
+        } else {
+          return budget;
+        };
+      })
     default:
       return state;
   }
@@ -79,9 +96,9 @@ store.subscribe(() => {
 })
 
 const budgetOne = store.dispatch(addBudget({ description: 'Phone', amount: 100 }));
+const budgetTwo = store.dispatch(addBudget({ description: 'Anotherone', amount: 400 }));
  
 store.dispatch(removeBudget({ id: budgetOne.budget.id }));
-
 store.dispatch(editBudget(budgetTwo.budget.id, { amount: 500 }));
 
 const demoState = {
