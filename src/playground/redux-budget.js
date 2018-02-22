@@ -36,7 +36,15 @@ const setTextFilter = (text = '') => ({
 })
 
 // SORT_BY_DATE
+const sortByDate = () => ({
+  type: 'SORT_BY_DATE'
+})
+
 // SORT_BY_AMOUNT
+const sortByAmount = () => ({
+  type: 'SORT_BY_AMOUNT'
+})
+
 // SET_START_DATE
 // SET_END_DATE
 
@@ -87,7 +95,16 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         text: action.text
       };
-
+    case 'SORT_BY_AMOUNT': 
+      return {
+        ...state,
+        sortBy: 'amount'
+      };
+      case 'SORT_BY_DATE': 
+      return {
+        ...state,
+        sortBy: 'date'
+      }
     default:
       return state;
   }
@@ -111,8 +128,12 @@ const budgetTwo = store.dispatch(addBudget({ description: 'Anotherone', amount: 
  
 store.dispatch(removeBudget({ id: budgetOne.budget.id }));
 store.dispatch(editBudget(budgetTwo.budget.id, { amount: 500 }));
+
 store.dispatch(setTextFilter('moumentext'));
 store.dispatch(setTextFilter( )); //empty one
+
+store.dispatch(sortByAmount());
+store.dispatch(sortByDate());
 
 const demoState = {
   budgets: [{
