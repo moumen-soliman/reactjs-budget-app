@@ -46,7 +46,16 @@ const sortByAmount = () => ({
 })
 
 // SET_START_DATE
+const setStartDate = (startDate) => ({
+  type: 'SET_START_DATE',
+  startDate
+})
+
 // SET_END_DATE
+const setEndDate = (endDate) => ({
+  type: 'SET_END_DATE',
+  endDate
+})
 
 // budgets Reducer
 
@@ -100,11 +109,21 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         sortBy: 'amount'
       };
-      case 'SORT_BY_DATE': 
+    case 'SORT_BY_DATE': 
       return {
         ...state,
         sortBy: 'date'
-      }
+      };
+    case 'SET_START_DATE': 
+      return {
+        ...state,
+        startDate: action.startDate
+      };
+    case 'SET_END_DATE': 
+      return {
+        ...state,
+        endDate: action.endDate
+      };
     default:
       return state;
   }
@@ -134,6 +153,10 @@ store.dispatch(setTextFilter( )); //empty one
 
 store.dispatch(sortByAmount());
 store.dispatch(sortByDate());
+
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+store.dispatch(setEndDate(1250));
 
 const demoState = {
   budgets: [{
