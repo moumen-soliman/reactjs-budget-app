@@ -129,6 +129,17 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   }
 };
 
+// Get visible Budgets
+const getVisibleBudgets = (budgets, {text, sortBy, startDate, endDate}) => {
+  return budgets.filter((budget) => {
+    const startDateMatch;
+    const endDateMatch;
+    const textMatch;
+    
+    return StartDateMatch && endDateMatch && textMatch;
+  })
+}
+
 // Store creation
 
 const store = createStore(
