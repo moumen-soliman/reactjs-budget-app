@@ -137,6 +137,12 @@ const getVisibleBudgets = (budgets, {text, sortBy, startDate, endDate}) => {
     const textMatch = budget.description.toLowerCase().includes(text.toLowerCase());
 
     return StartDateMatch && endDateMatch && textMatch;
+  }).sort((a, b) => {
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    } else if (sortBy === 'amount') {
+      return a.amount < b.amount ? 1 : -1;
+    }
   })
 }
 
