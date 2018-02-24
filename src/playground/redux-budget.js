@@ -132,10 +132,10 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 // Get visible Budgets
 const getVisibleBudgets = (budgets, {text, sortBy, startDate, endDate}) => {
   return budgets.filter((budget) => {
-    const startDateMatch;
-    const endDateMatch;
-    const textMatch;
-    
+    const startDateMatch = typeof startDate !== 'number' || budget.createdAt >= startDate;
+    const endDateMatch = typeof endDate !== 'number' || budget.createdAt <= endDate;
+    const textMatch = budget.description.toLowerCase().includes(text.toLowerCase());
+
     return StartDateMatch && endDateMatch && textMatch;
   })
 }
@@ -150,7 +150,9 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleBudgets = getVisibleBudgets(state.budgets, state.filters);
+  console.log(visibleBudgets)
 })
 
 const budgetOne = store.dispatch(addBudget({ description: 'Phone', amount: 100 }));
@@ -159,13 +161,13 @@ const budgetTwo = store.dispatch(addBudget({ description: 'Anotherone', amount: 
 store.dispatch(removeBudget({ id: budgetOne.budget.id }));
 store.dispatch(editBudget(budgetTwo.budget.id, { amount: 500 }));
 
-store.dispatch(setTextFilter('moumentext'));
+store.dispatch(setTextFilter('hone'));
 store.dispatch(setTextFilter( )); //empty one
 
 store.dispatch(sortByAmount());
 store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
+store.dispatch(setStartDate(2000));
 store.dispatch(setStartDate());
 store.dispatch(setEndDate(1250));
 
