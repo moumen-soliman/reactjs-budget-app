@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { addBudget } from './actions/budgets';
@@ -17,4 +18,10 @@ const state = store.getState();
 const visibleBudgets = getVisibleBudgets(state.budgets, state.filters);
 console.log(visibleBudgets)
 
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
+const jsx = (
+    <Provider store={store}>
+        <AppRouter />
+    </Provider>
+)
+
+ReactDOM.render(jsx, document.getElementById('root'));
