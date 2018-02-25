@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import BudgetListItem from './BudgetListItem';
+import selectBudgets from '../selectors/budgets';
 
 const BudgetList = (props) => (
     <div>
         <h1>Budget List</h1>
-        {props.filters.text}
-        {props.budgets.length}
+        {props.budgets.map((budget) => {
+            return <BudgetListItem key={budget.id} {...budget} />;
+        })}
     </div>
 );
 
 const mapStateToProps = (state) => {
     return {
-        budgets: state.budgets,
-        filters: state.filters
+        budgets: selectBudgets(state.budgets, state.filters)
     };
 };
 

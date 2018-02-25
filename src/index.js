@@ -10,7 +10,7 @@ import './index.css';
 
 const store = configureStore();
 
-store.dispatch(addBudget({description: 'Water Bill'}));
+store.dispatch(addBudget({description: 'Water Bill', amount: 4500 }));
 store.dispatch(addBudget({description: 'Gas Bill'}));
 store.dispatch(setTextFilter('water'));
 
