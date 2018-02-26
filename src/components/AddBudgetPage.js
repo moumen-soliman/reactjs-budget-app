@@ -1,8 +1,10 @@
 import React from 'react';
+import BudgetForm from './BudgetForm';
 
 const AddBudgetPage = () => (
   <div>
-    This is from my add Budget component
+    <h1>Add Budget</h1>
+    <BudgetForm />
   </div>
 );
 
