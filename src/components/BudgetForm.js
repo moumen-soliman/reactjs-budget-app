@@ -4,14 +4,18 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 export default class BudgetForm extends React.Component {
-    state = {
-        description: '',
-        note: '',
-        amount: '',
-        createdAt: moment(),
-        calendarFocused: false,
-        error: ''
-    };
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          description: props.budget ? props.budget.description : '',
+          note: props.budget ? props.budget.note : '',
+          amount: props.budget ? (props.budget.amount / 100).toString() : '',
+          createdAt: props.budget ? moment(props.budget.createdAt) : moment(),
+          calendarFocused: false,
+          error: ''
+        };
+      }
     onDescriptionChange = (e) => {
         const description = e.target.value;
         this.setState(() => ({ description }));
