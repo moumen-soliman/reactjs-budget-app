@@ -10,9 +10,9 @@ import './index.css';
 
 const store = configureStore();
 
-store.dispatch(addBudget({description: 'Water Bill', amount: 4500 }));
-store.dispatch(addBudget({description: 'Gas Bill'}));
-store.dispatch(setTextFilter('water'));
+store.dispatch(addBudget({ description: 'Water bill', amount: 4500 }));
+store.dispatch(addBudget({ description: 'Gas bill', createdAt: 1000 }));
+store.dispatch(addBudget({ description: 'Rent', amount: 109500 }));
 
 const state = store.getState();
 const visibleBudgets = getVisibleBudgets(state.budgets, state.filters);
@@ -20,8 +20,8 @@ console.log(visibleBudgets)
 
 const jsx = (
     <Provider store={store}>
-        <AppRouter />
+      <AppRouter />
     </Provider>
-)
+);
 
 ReactDOM.render(jsx, document.getElementById('root'));
