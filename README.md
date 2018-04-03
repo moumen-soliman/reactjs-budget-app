@@ -1,1 +1,0 @@
-## ReactJS Budget Auth app with Firebase
